@@ -1,6 +1,6 @@
 /**
  * @typedef {Object} Package
- * @description The Obejct defined by a package.json
+ * @description The {@link Object} defined by a package.json
  */
 
 /**
@@ -10,15 +10,17 @@
  */
 
 /**
- * Asynchronously the specified transform to the specified package.
+ * Asynchronously apply the specified transform to the specified package.
  * @param {transformCallback} tx
  * @param {Package} pkg
  * @returns {Promise<Package>}
  */
-module.exports = async function apply(tx, pkg) {
+async function apply(tx, pkg) {
   const result = await new Promise((resolve) => resolve(tx(pkg)));
   if (!result) {
     throw new Error('tx did not produce a result; did you forget to return your result?');
   }
   return result;
-};
+}
+
+module.exports = apply;
