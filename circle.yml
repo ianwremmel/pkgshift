@@ -28,6 +28,7 @@ jobs:
       - checkout
       - restore_cache: *restore_cache
       - run: npm install
+      - run: npm run build:docs
       - run: npm run lint
       - save_cache: *save_cache
 
