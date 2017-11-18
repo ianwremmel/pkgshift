@@ -46,6 +46,9 @@ jobs:
       - deploy:
           command: |
             if [ "${CIRCLE_BRANCH}" == "master" ]; then
+              # Ideally, this would be a prepublish script, but npm doesn't like
+              # the directory it's running in when it's called that way.
+              npm run build:docs
               npm run semantic-release || true
             fi
       - save_cache: *save_cache
