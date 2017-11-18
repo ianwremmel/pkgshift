@@ -8,7 +8,7 @@
   "main": "src/index.js",
   "repository": {
     "type": "git",
-    "url": "https://api.github.com/users/ianwremmel"
+    "url": "https://github.com/ianwremmel/pkgshift.git"
   },
   "scripts": {
     "build:docs": "documentation readme src/index.js --section=API",
@@ -21,10 +21,10 @@
     "lint:js": "npm run --silent lint:eslint -- .",
     "lint:deps": "npm run --silent lint:deps:missing && npm run --silent lint:deps:unused",
     "lint:deps:missing": "dependency-check package.json",
-    "lint:deps:unused": "dependency-check package.json --unused --no-dev",
+    "lint:deps:unused": "dependency-check package.json --ignore-module in-publish --unused --no-dev",
     "lint:staged": "lint-staged",
     "mocha-reporter-options": "[ -n \"${CI}\" ] && echo '--reporter xunit --reporter-options output=reports/junit/test.xml'",
-    "prepublishOnly": "npm run build:docs",
+    "prepublish": "in-publish && npm run build:docs",
     "precommit": "npm run --silent lint:staged",
     "test": "nyc --exclude test --exclude src/**/*-spec.js --reporter=text mocha $(npm run --silent mocha-reporter-options) './src/**/*-spec.js' './test/*/spec/**/*.js'",
     "semantic-release": "semantic-release pre && npm publish && semantic-release post"
@@ -38,6 +38,7 @@
   "dependencies": {
     "chalk": "^2.3.0",
     "debug": "^3.1.0",
+    "in-publish": "^2.0.0",
     "invariant": "^2.2.2",
     "mz": "^2.7.0",
     "supports-color": "^5.0.0",
