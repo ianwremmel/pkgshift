@@ -37,6 +37,7 @@
     "chalk": "^2.3.0",
     "debug": "^3.1.0",
     "supports-color": "^5.0.0"
+    "supports-color": "^5.0.0",
   },
   "devDependencies": {
     "@commitlint/cli": "^4.3.0",

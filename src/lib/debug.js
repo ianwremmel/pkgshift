@@ -4,23 +4,32 @@ const supportsColor = require('supports-color');
 
 const pkg = require('../../package');
 
+module.exports = d;
+
 /**
  * Wrapper around debug to ensure consistency across the project
+ * @example
+ * const {d, f} = require('./debug')(__filename)
+ * d('a plain string');
+ * d(f`a string with ${1} variable`);
  * @param {string} filename
  * @returns {Function}
  */
-function D(filename) {
+function d(filename) {
   const rootName = pkg.name.includes('/') ? pkg.name.split('/')
     .pop() : pkg.name;
 
-  return debug(filename
+  const res = debug(filename
     .substr(filename.indexOf(rootName))
     .replace('src/', '')
-    .replace(/\/|\\/g, ':'))
-    .replace(/.js$/, '');
-}
+    .replace(/\/|\\/g, ':')
+    .replace(/.js$/, ''));
 
-exports.D = D;
+  return {
+    d: res,
+    f
+  };
+}
 
 /**
  * Formatter for template strings.
