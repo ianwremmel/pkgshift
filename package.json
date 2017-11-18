@@ -26,8 +26,7 @@
     "mocha-reporter-options": "[ -n \"${CI}\" ] && echo '--reporter xunit --reporter-options output=reports/junit/test.xml'",
     "prepublishOnly": "npm run build:docs",
     "precommit": "npm run --silent lint:staged",
-    "test": "mocha $(npm run --silent mocha-reporter-options) './src/**/*-spec.js' './test/*/spec/**/*.js'",
-    "test:coverage": "nyc --exclude src/**/*-spec.js --reporter=text npm test",
+    "test": "nyc --exclude test --exclude src/**/*-spec.js --reporter=text mocha $(npm run --silent mocha-reporter-options) './src/**/*-spec.js' './test/*/spec/**/*.js'",
     "semantic-release": "semantic-release pre && npm publish && semantic-release post"
   },
   "engines": {
