@@ -1,5 +1,6 @@
 const chalk = require('chalk');
 const debug = require('debug');
+const invariant = require('invariant');
 const supportsColor = require('supports-color');
 
 const pkg = require('../../package');
@@ -16,6 +17,9 @@ module.exports = d;
  * @returns {Function}
  */
 function d(filename) {
+  invariant(filename, '$filename is required');
+  invariant(typeof filename === 'string', '$filename must be a string');
+
   const rootName = pkg.name.includes('/') ? pkg.name.split('/')
     .pop() : pkg.name;
 

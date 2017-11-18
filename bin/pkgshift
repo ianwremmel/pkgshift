@@ -1,0 +1,79 @@
+#!/usr/bin/env node
+
+const debug = require('debug');
+const yargs = require('yargs');
+
+const {exitCodes: E_UNHANDLED_REJECTION, pkgshift} = require('..');
+
+// eslint-disable-next-line no-unused-expressions
+const {argv} = yargs
+  .command(
+    'run [path] [OPTIONS]',
+    'Transform a package.json',
+    (y) => y
+      .positional('path', {
+        default: './package.json',
+        description: 'File to transform'
+      })
+      .options({
+        d: {
+          alias: 'dry',
+          description: 'Dry run (no changes are made to files)',
+          type: 'boolean'
+        },
+        debug: {
+          description: 'Print stacktraces',
+          type: 'boolean'
+        },
+        p: {
+          alias: 'print',
+          description: 'Print output, useful for development',
+          type: 'boolean'
+        },
+        s: {
+          alias: 'silent',
+          description: 'No output',
+          type: 'boolean'
+        },
+        t: {
+          alias: 'transform',
+          default: './transform.js',
+          description: 'Path to the transform file.',
+          type: 'string'
+        },
+        v: {
+          alias: 'verbose',
+          description: 'Show more information about the transform process',
+          type: 'count'
+        }
+      }),
+    pkgshift
+  )
+  .demandCommand()
+  .help()
+  .recommendCommands();
+
+if (argv.verbose > 1) {
+  debug.enable('pkgshift:*');
+}
+else if (argv.verbose > 0) {
+  debug.enable('pkgshift:index,pkgshift:bin');
+}
+
+process.on('unhandledRejection', (err) => {
+  const name = process.argv[1]
+    .split('/')
+    .pop();
+
+  const cmd = `${name} ${process.argv
+    .slice(2)
+    .join(' ')}`;
+
+  console.error(`Failed to execute "${cmd}"`);
+  console.error(err.stack || err.toString());
+  if (argv.debug) {
+    console.error(err);
+  }
+  // eslint-disable-next-line no-process-exit
+  process.exit(E_UNHANDLED_REJECTION);
+});

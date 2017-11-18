@@ -2,7 +2,7 @@
 
 const {assert} = require('chai');
 
-const apply = require('.');
+const {apply} = require('.');
 
 describe('apply()', () => {
   it('transforms a package with a synchronous transform', async() => {

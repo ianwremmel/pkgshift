@@ -9,7 +9,16 @@ rules:
     - error
     -
         matchDescription: '.+'
-        requireReturn: true
+        requireReturn: false
         requireReturnType: true
         requireParamDescription: false
         requireReturnDescription: false
+  require-jsdoc:
+    - error
+    -
+      require:
+        FunctionDeclaration: true
+        ClassDeclaration: true
+        MethodDefinition: true
+        ArrowFunctionExpression: false
+        FunctionExpression: true
