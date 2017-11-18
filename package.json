@@ -2,12 +2,16 @@
   "name": "@ianwremmel/pkgshift",
   "version": "0.0.0-development",
   "description": "Inspired by jscodeshift for to help keep package.json consistent",
-  "bin": {},
+  "bin": {
+    "pkgshift": "bin/pkgshift"
+  },
+  "main": "src/index.js",
   "repository": {
     "type": "git",
     "url": "https://api.github.com/users/ianwremmel"
   },
   "scripts": {
+    "build:docs": "documentation readme src/index.js --section=API",
     "commitmsg": "npm run --silent lint:commitmsg",
     "coveralls": "nyc report --reporter=text-lcov | coveralls",
     "lint": "npm run --silent lint:js && npm run --silent lint:changelog && npm run --silent lint:deps",
@@ -20,23 +24,36 @@
     "lint:deps:unused": "dependency-check package.json --unused --no-dev",
     "lint:staged": "lint-staged",
     "mocha-reporter-options": "[ -n \"${CI}\" ] && echo '--reporter xunit --reporter-options output=reports/junit/test.xml'",
+    "prepublishOnly": "npm run build:docs",
     "precommit": "npm run --silent lint:staged",
-    "test": "nyc --reporter=text mocha $(npm run --silent mocha-reporter-options) './src/**/*-spec.js'",
+    "test": "nyc --exclude test --exclude src/**/*-spec.js --reporter=text mocha $(npm run --silent mocha-reporter-options) './src/**/*-spec.js' './test/*/spec/**/*.js'",
     "semantic-release": "semantic-release pre && npm publish && semantic-release post"
   },
-  "engines": {},
+  "engines": {
+    "node": "8.x"
+  },
   "keywords": [],
   "author": "Ian W. Remmel <design@ianwremmel.com>",
   "license": "MIT",
-  "dependencies": {},
+  "dependencies": {
+    "chalk": "^2.3.0",
+    "debug": "^3.1.0",
+    "invariant": "^2.2.2",
+    "mz": "^2.7.0",
+    "supports-color": "^5.0.0",
+    "yargs": "^10.0.3"
+  },
   "devDependencies": {
-    "@commitlint/cli": "^4..3.0",
+    "@commitlint/cli": "^4.3.0",
     "@commitlint/config-angular": "^4.3.0",
+    "@ianwremmel/eslint-config-base": "^1.0.0",
+    "@ianwremmel/eslint-config-standard": "^1.1.0",
     "babel-eslint": "^8.0.2",
     "chai": "^4.1.2",
     "condition-circle": "^1.5.0",
     "coveralls": "^3.0.0",
     "dependency-check": "^2.9.1",
+    "documentation": "^5.3.3",
     "eslint": "^4.11.0",
     "eslint-plugin-import": "^2.8.0",
     "eslint-plugin-mocha": "^4.11.0",

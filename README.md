@@ -21,6 +21,8 @@ npm install @ianwremmel/pkgshift
 
 ## Usage
 
+## API
+
 ## Maintainers
 
 [Ian Remmel](https://github.com/ianwremmel)
