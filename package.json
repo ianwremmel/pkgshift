@@ -1,7 +1,7 @@
 {
   "name": "@ianwremmel/pkgshift",
   "version": "0.0.0-development",
-  "description": "Inspired by jscodeshift for to help keep package.json consistent",
+  "description": "Inspired by jscodeshift to help keep package.json consistent",
   "bin": {
     "pkgshift": "bin/pkgshift"
   },

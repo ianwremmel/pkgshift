@@ -11,7 +11,7 @@
 [![CircleCI](https://circleci.com/gh/ianwremmel/pkgshift.svg?style=svg)](https://circleci.com/gh/ianwremmel/pkgshift)
 [![Coverage Status](https://coveralls.io/repos/github/ianwremmel/pkgshift/badge.svg?branch=master)](https://coveralls.io/github/ianwremmel/pkgshift?branch=master)
 
-> Inspired by jscodeshift for to help keep package.json consistent
+> Inspired by jscodeshift to help keep package.json consistent
 
 ## Install
 
