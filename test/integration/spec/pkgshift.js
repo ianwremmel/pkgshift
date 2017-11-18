@@ -6,7 +6,7 @@ const {assert} = require('chai');
 const {read} = require('../../../src/lib/package');
 const run = require('../lib/run');
 
-describe('pkgshift', () => {
+describe.skip('pkgshift', () => {
   afterEach(() => {
     execSync('git checkout .', {cwd: path.resolve(__dirname, '../fixtures')});
   });
