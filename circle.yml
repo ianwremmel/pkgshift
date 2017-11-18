@@ -46,7 +46,7 @@ jobs:
       - deploy:
           command: |
             if [ "${CIRCLE_BRANCH}" == "master" ]; then
-              npm run semantic-release
+              npm run semantic-release || true
             fi
       - save_cache: *save_cache
 
