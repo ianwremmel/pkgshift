@@ -27,7 +27,7 @@
     "prepublishOnly": "npm run build:docs",
     "precommit": "npm run --silent lint:staged",
     "test": "nyc --exclude test --exclude src/**/*-spec.js --reporter=text mocha $(npm run --silent mocha-reporter-options) './src/**/*-spec.js' './test/*/spec/**/*.js'",
-    "semantic-release": "semantic-release pre && npm publish && semantic-release post"
+    "semantic-release": "pwd && npm run build:docs # && semantic-release pre && npm publish && semantic-release post"
   },
   "engines": {
     "node": "8.x"
