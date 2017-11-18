@@ -21,10 +21,12 @@
     "lint:staged": "lint-staged",
     "mocha-reporter-options": "[ -n \"${CI}\" ] && echo '--reporter xunit --reporter-options output=reports/junit/test.xml'",
     "precommit": "npm run --silent lint:staged",
-    "test": "nyc --reporter=text mocha $(npm run --silent mocha-reporter-options) './src/**/*-spec.js'",
+    "test": "nyc --exclude src/**/*-spec.js --reporter=text mocha $(npm run --silent mocha-reporter-options) './src/**/*-spec.js'",
     "semantic-release": "semantic-release pre && npm publish && semantic-release post"
   },
-  "engines": {},
+  "engines": {
+    "node": "8.x"
+  },
   "keywords": [],
   "author": "Ian W. Remmel <design@ianwremmel.com>",
   "license": "MIT",
