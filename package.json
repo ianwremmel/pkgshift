@@ -8,7 +8,7 @@
   "main": "src/index.js",
   "repository": {
     "type": "git",
-    "url": "https://api.github.com/users/ianwremmel"
+    "url": "https://github.com/ianwremmel/pkgshift.git"
   },
   "scripts": {
     "build:docs": "documentation readme src/index.js --section=API",
