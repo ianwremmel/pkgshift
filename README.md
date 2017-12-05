@@ -22,7 +22,7 @@ npm install @ianwremmel/pkgshift
 or
 
 ```js
-npm install @ianwremmel/pkgshift
+npm install -g @ianwremmel/pkgshift
 ```
 
 ## Usage
