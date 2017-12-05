@@ -2,9 +2,9 @@
 
 const {assert} = require('chai');
 
-const {apply} = require('.');
+const {pkgShift} = require('.');
 
-describe('apply()', () => {
+describe('pkgShift()', () => {
   it('transforms a package with a synchronous transform', async() => {
     const target = {name: 'ALL_CAPS_NAME'};
 
@@ -19,7 +19,7 @@ describe('apply()', () => {
       return pkg;
     }
 
-    const result = await apply(tx, target);
+    const result = await pkgShift(tx, target);
 
     assert.deepEqual(result, {name: 'all_caps_name'});
   });
@@ -38,7 +38,7 @@ describe('apply()', () => {
       return Promise.resolve(pkg);
     }
 
-    const result = await apply(tx, target);
+    const result = await pkgShift(tx, target);
 
     assert.deepEqual(result, {name: 'all_caps_name'});
   });
@@ -57,7 +57,7 @@ describe('apply()', () => {
     }
 
     try {
-      await apply(tx, target);
+      await pkgShift(tx, target);
       assert.fail('apply should have thrown when tx produced an invalid result');
     }
     catch (err) {
