@@ -6,6 +6,7 @@ const {d, f} = require('./debug')(__filename);
 /**
  * Reads a package.json into a {@link Package}
  * @param {string} file - Path to a package.json
+ * @private
  * @returns {Promise<Package>}
  */
 async function read(file) {
@@ -28,6 +29,7 @@ exports.read = read;
  * Writes a {@link Package} back to a package.json
  * @param {string} file - Path to a package.json
  * @param {Package} pkg - The {@link Package} to write
+ * @private
  */
 async function write(file, pkg) {
   invariant(file, '$file is required');

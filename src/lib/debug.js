@@ -14,6 +14,7 @@ module.exports = d;
  * d('a plain string');
  * d(f`a string with ${1} variable`);
  * @param {string} filename
+ * @private
  * @returns {Function}
  */
 function d(filename) {
@@ -39,6 +40,7 @@ function d(filename) {
  * Formatter for template strings.
  * @param {Array<string>} tpl
  * @param {Array<mixed>} params
+ * @private
  * @returns {string}
  */
 function f(tpl, ...params) {
@@ -60,6 +62,7 @@ exports.f = f;
 /**
  * Colorizes variables for template string
  * @param {mixed} value
+ * @private
  * @returns {string}
  */
 function v(value) {

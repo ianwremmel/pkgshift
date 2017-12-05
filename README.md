@@ -19,7 +19,31 @@
 npm install @ianwremmel/pkgshift
 ```
 
+or
+
+```js
+npm install @ianwremmel/pkgshift
+```
+
 ## Usage
+
+For the most up to date docs, run `pkgshift --help`.
+
+### run
+
+`pkgshift run ./package.json -t ./tranform.js
+
+`pkgshift`'s only command, `run`, applies a transform file to a package.json.
+
+A transform file is of the form
+
+```js
+module.exports = function transform(pkg, {api}) {
+    return Object.assign(pkg);
+};
+```
+
+where `transform` implements the [transformCallback](transformcallback)  and `api` is a reference to the [TransformAPI](transformapi).
 
 ## API
 

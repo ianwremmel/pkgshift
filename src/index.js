@@ -9,20 +9,17 @@ const api = require('./transform-api');
 
 exports.exitCodes = require('./lib/exit-codes');
 
-
 /**
- * @access public
  * @typedef {Object} Package
  * @description The {@link Object} defined by a package.json
  */
 
 /**
- * @access public
  * @typedef {Object} TransformAPI
+ * @description Helper methods passed to your transform function
  */
 
 /**
- * @access public
  * @callback transformCallback
  * @param {Package} pkg
  * @param {Object} options
@@ -32,12 +29,11 @@ exports.exitCodes = require('./lib/exit-codes');
 
 /**
  * Asynchronously apply the specified transform to the specified package.
- * @access public
  * @param {transformCallback} tx
  * @param {Package} pkg
  * @returns {Promise<Package>}
  */
-async function apply(tx, pkg) {
+async function pkgShift(tx, pkg) {
   const result = await new Promise((resolve) => resolve(tx(pkg, {api})));
   if (!result) {
     throw new Error('tx did not produce a result; did you forget to return your result?');
@@ -45,7 +41,16 @@ async function apply(tx, pkg) {
   return result;
 }
 
-exports.apply = apply;
+exports.pkgShift = pkgShift;
+
+/**
+ * Asynchronously apply the specified transform to the specified package.
+ * @deprecated Please use {@link pkgShift()}
+ * @param {transformCallback} tx
+ * @param {Package} pkg
+ * @returns {Promise<Package>}
+ */
+exports.apply = pkgShift;
 
 /**
  * @typedef {Object} PkgShiftOptions
@@ -62,7 +67,7 @@ exports.apply = apply;
  * Main command line entry point
  * @param {PkgShiftOptions} options
  */
-async function pkgshift(options = {}) {
+async function cli(options = {}) {
   d(f`loading transform ${options.transform}`);
   const tx = await loadTransform(options.transform);
   d(f`loaded transform ${options.transform}`);
@@ -72,7 +77,7 @@ async function pkgshift(options = {}) {
   d(f`loaded package ${options.path}`);
 
   d(f`transforming package ${options.path}`);
-  const result = await apply(tx, pkg);
+  const result = await pkgShift(tx, pkg);
   d(f`transformed package ${options.path}`);
 
   if (options.print) {
@@ -95,11 +100,21 @@ async function pkgshift(options = {}) {
   }
 }
 
-exports.pkgshift = pkgshift;
+exports.cli = cli;
+
+/**
+ * @function pkgshift
+ * @deprecated please use {@link cli}
+ * Main command line entry point
+ * @param {PkgShiftOptions} options
+ */
+exports.pkgshift = cli;
+
 
 /**
  * Loads a transform function via require
  * @param {string} name
+ * @private
  * @returns {Function}
  */
 async function loadTransform(name) {

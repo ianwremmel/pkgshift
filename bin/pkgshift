@@ -3,7 +3,7 @@
 const debug = require('debug');
 const yargs = require('yargs');
 
-const {exitCodes: E_UNHANDLED_REJECTION, pkgshift} = require('..');
+const {exitCodes: E_UNHANDLED_REJECTION, cli} = require('..');
 
 // eslint-disable-next-line no-unused-expressions
 const {argv} = yargs
@@ -47,7 +47,7 @@ const {argv} = yargs
           type: 'count'
         }
       }),
-    pkgshift
+    cli
   )
   .demandCommand()
   .help()
