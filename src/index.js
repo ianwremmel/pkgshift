@@ -5,28 +5,40 @@ const invariant = require('invariant');
 
 const {d, f} = require('./lib/debug')(__filename);
 const {read, write} = require('./lib/package');
+const api = require('./transform-api');
 
 exports.exitCodes = require('./lib/exit-codes');
 
+
 /**
+ * @access public
  * @typedef {Object} Package
  * @description The {@link Object} defined by a package.json
  */
 
 /**
+ * @access public
+ * @typedef {Object} TransformAPI
+ */
+
+/**
+ * @access public
  * @callback transformCallback
  * @param {Package} pkg
+ * @param {Object} options
+ * @param {TransformAPI} options.api
  * @returns {Package|Promise<Package>}
  */
 
 /**
  * Asynchronously apply the specified transform to the specified package.
+ * @access public
  * @param {transformCallback} tx
  * @param {Package} pkg
  * @returns {Promise<Package>}
  */
 async function apply(tx, pkg) {
-  const result = await new Promise((resolve) => resolve(tx(pkg)));
+  const result = await new Promise((resolve) => resolve(tx(pkg, {api})));
   if (!result) {
     throw new Error('tx did not produce a result; did you forget to return your result?');
   }

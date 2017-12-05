@@ -4,21 +4,8 @@ env:
 extends:
   - "@ianwremmel/eslint-config-standard"
 parser: babel-eslint
-rules:
-  valid-jsdoc:
-    - error
-    -
-        matchDescription: '.+'
-        requireReturn: false
-        requireReturnType: true
-        requireParamDescription: false
-        requireReturnDescription: false
-  require-jsdoc:
-    - error
-    -
-      require:
-        FunctionDeclaration: true
-        ClassDeclaration: true
-        MethodDefinition: true
-        ArrowFunctionExpression: false
-        FunctionExpression: true
+overrides:
+  -
+    files: "**/*-spec.js"
+    rules:
+      max-nested-callbacks: off
