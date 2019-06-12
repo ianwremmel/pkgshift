@@ -39,7 +39,7 @@
     "debug": "^4.0.1",
     "invariant": "^2.2.2",
     "mz": "^2.7.0",
-    "supports-color": "^6.0.0",
+    "supports-color": "^7.0.0",
     "yargs": "^13.1.0"
   },
   "devDependencies": {
