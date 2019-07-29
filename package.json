@@ -51,7 +51,7 @@
     "chai": "^4.1.2",
     "condition-circle": "^2.0.1",
     "coveralls": "^3.0.0",
-    "dependency-check": "^3.0.0",
+    "dependency-check": "^4.1.0",
     "documentation": "^12.0.0",
     "eslint": "^5.1.0",
     "eslint-plugin-import": "^2.8.0",
